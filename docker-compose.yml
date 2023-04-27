@@ -1,0 +1,32 @@
+version: "3"
+services:
+  dev-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./dev_data:/remote_data # mount
+      #- ./nginx:/etc/nginx/conf.d
+    ports:
+      - 2222:22 # SSH PORT
+      - 2525:25 # SMTP PORT
+      - 80:80 # HTTP PORT
+      - 11110:110 # POP3 PORT
+      - 443:443 # HTTPS PORT
+      - 53306:3306 # MariaDB PORT
+    command: bash -c "service nginx start && service ssh start && service mariadb start && tail -f /dev/null"
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb:latest
+    volumes:
+      - ./mariadb/conf.d:/etc/mysql/conf.d
+      - ./mariadb/data:/var/lib/mysql
+    environment:
+      - MYSQL_HOST=localhost
+      - MYSQL_PORT=3306
+      - MYSQL_ROOT_PASSWORD=1234
+      - TZ=Asia/Seoul
+      - LC_ALL=en_US.UTF-8
