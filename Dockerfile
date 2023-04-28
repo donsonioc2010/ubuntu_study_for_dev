@@ -35,7 +35,6 @@ ENV LANGUAGE=ko_KR.UTF-8
 # COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
 # SSH 서버 설정 변경
-RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN service ssh start && service nginx start
 
 
