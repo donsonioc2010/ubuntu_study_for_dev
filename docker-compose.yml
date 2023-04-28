@@ -21,9 +21,11 @@ services:
 
   mariadb:
     image: mariadb:latest
+    container_name: study_db
     volumes:
-      - ./mariadb/conf.d:/etc/mysql/conf.d
-      - ./mariadb/data:/var/lib/mysql
+      - ./mariadb/conf.d:/etc/mysql/conf.d:ro
+      - ./mariadb/data:/var/lib/mysql:rw
+      - ./mariadb/initdb.d:/docker-entrypoint-initdb.d:ro
     environment:
       - MYSQL_HOST=localhost
       - MYSQL_PORT=3306
