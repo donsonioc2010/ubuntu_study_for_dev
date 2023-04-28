@@ -1,4 +1,6 @@
-# Bitcamp_Study_DockerSample
+# Study_For_Linux_By_DockerSample
+
+> 해당 docker-compose는 리눅스를 처음 사용해보는 사람을 위해 제작한 docker-compose입니다.
 
 ---
 
