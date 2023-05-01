@@ -5,7 +5,6 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: no
-    user: root
     volumes:
       - ./dev_data:/remote_data # mount
       #- ./nginx:/etc/nginx/conf.d

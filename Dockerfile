@@ -45,6 +45,7 @@ VOLUME /var/lib/mysql
 VOLUME /docker-entrypoint-initdb.d
 
 # Locale 환경 변수 설정, 한국어 사용을 위함
+ENV TZ=Asia/Seoul
 ENV LC_ALL=ko_KR.UTF-8
 ENV LANG=ko_KR.UTF-8
 ENV LANGUAGE=ko_KR.UTF-8
@@ -53,8 +54,6 @@ ENV LANGUAGE=ko_KR.UTF-8
 ENV MYSQL_HOST=localhost
 ENV MYSQL_PORT=3306
 ENV MYSQL_ROOT_PASSWORD=1234
-ENV TZ=Asia/Seoul
-ENV LC_ALL=en_US.UTF-8
 
 
 # Nginx의 경우에는 아직 제작안했기 때문에 주석처리를 하였으나 Nginx를 추후 설정하는 작업
@@ -63,7 +62,9 @@ ENV LC_ALL=en_US.UTF-8
 # MariaDB 설정파일 작업
 COPY ./mariadb/conf.d/my.cnf /etc/mysql/my.cnf
 
+COPY ./config/startup.sh .
+
 # SSH, SMTP, HTTP, POP3, HTTPS, MariaDB Export 
 EXPOSE 22 25 80 110 443 3306
 
-CMD ["/sbin/init"]
+CMD ["/bin/bash", "-c","startup.sh" ]

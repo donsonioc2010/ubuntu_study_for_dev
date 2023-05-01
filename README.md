@@ -84,5 +84,17 @@
 
 ## Docker Image 방식으로 사용방법
 
-1. docker build -t {name} .
-2. docker run -it -d --privileged=true --name {imagename} /sbin/init
+1. docker build -t {이미지 태크 명} .
+2. docker run -it -d --privileged=true --name {컨테이너 명} {이미지 태그 명} /sbin/init
+   1. name항목은 희망사항이며, 컨테이너 명칭이 변경된다. 입력이 안되면 랜덤값이 입력된다.
+
+```Example Code
+docker build -t dev_ubuntu .
+docker run -it -d --privileged=true --name dev_study_ubuntu dev_ubuntu /sbin/init
+```
+
+### 포트 연결
+
+> 필요한 만큼 하자
+> `docker run -it -d -p 44444:22 -p 80:80 -p 443:443 -p 53306:3306 --privileged=true --name dev_study_ubuntu dev_ubuntu /sbin/init
+`
