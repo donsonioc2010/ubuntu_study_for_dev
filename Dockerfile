@@ -23,6 +23,9 @@ RUN apt-get update && \
     vim \ 
     locales
     
+RUN apt-get update && \
+    apt-get -y install sudo
+    
 # Locale 설정 추가
 RUN locale-gen ko_KR.UTF-8
 
@@ -57,10 +60,10 @@ ENV LC_ALL=en_US.UTF-8
 # Nginx의 경우에는 아직 제작안했기 때문에 주석처리를 하였으나 Nginx를 추후 설정하는 작업
 # COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
-# MariaDB 설정파일 
+# MariaDB 설정파일 작업
 COPY ./mariadb/conf.d/my.cnf /etc/mysql/my.cnf
 
 # SSH, SMTP, HTTP, POP3, HTTPS, MariaDB Export 
 EXPOSE 22 25 80 110 443 3306
 
-CMD ["/bin/bash"]
+CMD ["/sbin/init"]

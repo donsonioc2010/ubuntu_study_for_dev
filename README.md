@@ -1,6 +1,6 @@
 # Study_For_Linux_By_DockerSample
 
-> 해당 docker-compose는 리눅스를 처음 사용해보는 사람을 위해 제작한 docker-compose입니다.
+> 해당 docker-compose는 리눅스를 처음 사용해보는 사람을 위해서 자주 사용하는 패키지를 Base로 설정한 docker-compose입니다.
 
 ---
 
@@ -67,13 +67,6 @@
 
    3. 본인이 입력한 DATABASE_NAME으로 연결테스트 진행
 
-   ```SQL
-   CREATE USER 'root'@'%' IDENTIFIED BY '1234';
-   GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
-   FLUSH PRIVILEGES;
-   CREATE DATABASE {DATABASE_NAME};
-   ```
-
 ---
 
 ## Port 설정
@@ -87,4 +80,9 @@
 |   443    |      443      | HTTPS Port   |
 |  53306   |     3306      | MariaDB Port |
 
-이후 테스트
+---
+
+## Docker Image 방식으로 사용방법
+
+1. docker build -t {name} .
+2. docker run -it -d --privileged=true --name {imagename} /sbin/init
